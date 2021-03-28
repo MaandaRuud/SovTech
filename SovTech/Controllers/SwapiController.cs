@@ -18,9 +18,14 @@ namespace SovTech.Controllers
         {
             try
             {
+                string uri= "https://swapi.dev/api/people/";
+                if (model.Page > 1)
+                {
+                    uri = "https://swapi.dev/api/people/?Page=" + model.Page;
+                }
                 using (var client = new HttpClient())
                 {
-                    var responseTask = client.GetAsync("https://swapi.dev/api/people/");
+                    var responseTask = client.GetAsync(uri);
                     responseTask.Wait();
 
                     var result = responseTask.Result;
